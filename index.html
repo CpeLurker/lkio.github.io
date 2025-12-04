@@ -1,52 +1,197 @@
 <!DOCTYPE html>
-<html lang="zh-CN">  
-<head> 
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>陆先生联系方式</title>
-    <link rel="stylesheet" href="apple-card.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>苹果风格电子名片</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- GSAP 动画库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-gray': '#f5f5f7',
+                        'apple-blue': '#0071e3',
+                        'apple-text': '#1d1d1f',
+                        'apple-secondary': '#86868b'
+                    },
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'apple': '0 4px 20px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05)',
+                        'apple-hover': '0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            }
+            
+            .glass-effect {
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                background-color: rgba(255, 255, 255, 0.7);
+            }
+            
+            .card-gradient {
+                background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            }
+            
+            .ripple {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .ripple:after {
+                content: "";
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                pointer-events: none;
+                background-image: radial-gradient(circle, #000 10%, transparent 10.01%);
+                background-repeat: no-repeat;
+                background-position: 50%;
+                transform: scale(10, 10);
+                opacity: 0;
+                transition: transform 0.5s, opacity 0.3s;
+            }
+            
+            .ripple:active:after {
+                transform: scale(0, 0);
+                opacity: 0.3;
+                transition: 0s;
+            }
+        }
+    </style>
 </head>
-<body>
-    <div class="page-container">
-        <main class="contact-section">
-            <div class="contact-card">
-                
-                <header class="card-header">
-                    <div class="initials-circle">
-                        L
-                    </div>
-                    
-                    <h1 class="name">陆先生</h1>
-                    <p class="role-title">联系人</p>
-                </header>
-
-                <div class="contact-details">
-                    <a href="tel:xxxx" class="contact-item primary-contact">
-                        <div class="icon-box">
-                            <i class="fas fa-phone-alt"></i>
-                        </div>
-                        <div class="info-text">
-                            <p class="label">手机号码</p>
-                            <p class="value">xxxx</p>
-                        </div>
-                        <i class="fas fa-chevron-right arrow"></i>
-                    </a>
-                    
-                    <div class="contact-item secondary-contact">
-                        <div class="icon-box">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="info-text">
-                            <p class="label">电子邮件</p>
-                            <p class="value">请在此处填写邮箱</p>
-                        </div>
-                    </div>
-                </div>
-
+<body class="bg-apple-gray min-h-screen flex items-center justify-center p-4 font-sans">
+    <div id="business-card" class="w-full max-w-md card-gradient rounded-2xl shadow-apple transition-all duration-300 transform hover:shadow-apple-hover p-8 relative overflow-hidden">
+        <!-- 高光效果 -->
+        <div class="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/30 to-transparent"></div>
+        
+        <!-- 头像区域 -->
+        <div class="flex justify-center mb-6">
+            <div class="w-24 h-24 rounded-full bg-apple-blue flex items-center justify-center text-white text-4xl shadow-lg">
+                <span id="initial">JD</span>
             </div>
-        </main>
+        </div>
+        
+        <!-- 姓名 -->
+        <h1 id="name" class="text-3xl font-bold text-center text-apple-text mb-2 text-shadow">陆先生</h1>
+        
+        <!-- 职位 -->
+        <p id="title" class="text-center text-apple-secondary mb-6">车主</p>
+        
+        <!-- 联系方式 -->
+        <div class="space-y-4">
+            <!-- 电话 -->
+            <a href="tel:+8613800138000" class="flex items-center p-3 rounded-xl bg-white/50 hover:bg-white/80 transition-all duration-200 ripple">
+                <div class="w-10 h-10 rounded-full bg-apple-blue/10 flex items-center justify-center text-apple-blue mr-4">
+                    <i class="fa fa-phone"></i>
+                </div>
+                <div>
+                    <p class="text-xs text-apple-secondary">电话</p>
+                    <p id="phone" class="text-apple-text">138-0013-8000</p>
+                </div>
+            </a>
+            
+                    <!-- 底部按钮 -->
+        <div class="mt-8 flex justify-center">
+            <a href="tel:+8613800138000" id="call-btn" class="px-6 py-3 bg-apple-blue text-white rounded-full shadow-md hover:shadow-lg transition-all duration-200 transform hover:scale-105 ripple">
+                <i class="fa fa-phone mr-2"></i>拨打电话
+            </a>
+        </div>
     </div>
+
+    <script>
+        // 初始化3D倾斜效果
+        const card = document.getElementById('business-card');
+        
+        // 监听鼠标移动，实现卡片倾斜效果
+        document.addEventListener('mousemove', (e) => {
+            if (window.innerWidth > 768) { // 仅在桌面设备上启用
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                gsap.to(card, {
+                    duration: 1,
+                    rotateY: xAxis,
+                    rotateX: yAxis,
+                    transformStyle: "preserve-3d"
+                });
+            }
+        });
+        
+        // 鼠标离开时恢复卡片位置
+        document.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                duration: 1,
+                rotateY: 0,
+                rotateX: 0,
+                transformStyle: "preserve-3d"
+            });
+        });
+        
+        // 拨打电话按钮点击效果增强
+        document.getElementById('call-btn').addEventListener('click', (e) => {
+            // 创建点击反馈
+            const phoneNumber = document.getElementById('phone').textContent;
+            showCallAlert(`正在拨打 ${phoneNumber}`);
+        });
+        
+        // 显示拨打电话提示
+        function showCallAlert(message) {
+            // 创建提示元素
+            const alert = document.createElement('div');
+            alert.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-apple-blue text-white px-4 py-2 rounded-lg shadow-lg z-50';
+            alert.textContent = message;
+            
+            // 添加到页面
+            document.body.appendChild(alert);
+            
+            // 2秒后移除
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                alert.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(alert);
+                }, 500);
+            }, 2000);
+        }
+        
+        // 生成姓名首字母
+        function generateInitial() {
+            const name = document.getElementById('name').textContent;
+            const initials = name.split('').filter(char => /[\u4e00-\u9fa5]/.test(char)).slice(0, 1);
+            document.getElementById('initial').textContent = initials.join('');
+        }
+        
+        // 页面加载完成后执行
+        window.addEventListener('DOMContentLoaded', () => {
+            generateInitial();
+            
+            // 添加卡片入场动画
+            gsap.from(card, {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out'
+            });
+        });
+    </script>
 </body>
 </html>
