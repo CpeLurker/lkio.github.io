@@ -3,22 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>极简联系名片</title>
-    <link rel="stylesheet" href="minimal.css">
+    <title>陆先生联系方式</title>
+    <link rel="stylesheet" href="apple-card.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <div class="card-container">
-        <div class="minimal-card">
-            <div class="name-section">
-                <p class="role-hint">Mr.</p>
-                <h1>陆先生</h1>
+    <div class="page-container">
+        <main class="contact-section">
+            <div class="contact-card">
+                
+                <header class="card-header">
+                    <div class="initials-circle">
+                        L
+                    </div>
+                    
+                    <h1 class="name">陆先生</h1>
+                    <p class="role-title">联系人</p>
+                </header>
+
+                <div class="contact-details">
+                    <a href="tel:xxxx" class="contact-item primary-contact">
+                        <div class="icon-box">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="info-text">
+                            <p class="label">手机号码</p>
+                            <p class="value">xxxx</p>
+                        </div>
+                        <i class="fas fa-chevron-right arrow"></i>
+                    </a>
+                    
+                    <div class="contact-item secondary-contact">
+                        <div class="icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="info-text">
+                            <p class="label">电子邮件</p>
+                            <p class="value">请在此处填写邮箱</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            
-            <div class="contact-section">
-                <p class="contact-label">联系方式 Contact</p>
-                <p class="contact-number">xxxx</p>
-            </div>
-        </div>
-    </div> 
+        </main>
+    </div>
 </body>
 </html>
