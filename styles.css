@@ -1,76 +1,142 @@
-/* 全局设置 */
+/* 基础和字体 */
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Noto Sans SC', 'SF Pro Text', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8; /* 极浅灰背景 */
+    background-color: #f2f2f7; /* iOS 风格的背景色 */
+    color: #1c1c1e; /* 标准深色文字 */
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 页面容器：实现垂直居中 */
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 保持在顶部，但可以在大屏幕上调整为 center */
+    min-height: 100vh;
+    padding-top: 50px; /* 顶部留白 */
+    width: 100%;
+}
+
+/* 联系信息卡片容器 */
+.contact-card {
+    width: 90%;
+    max-width: 400px; /* 模拟手机宽度 */
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 0 0 0 rgba(0,0,0,0); /* 极简风格，不使用明显阴影 */
+    overflow: hidden;
+    text-align: center;
+}
+
+/* 头部样式 */
+.card-header {
+    padding: 30px 20px 20px 20px;
+    text-align: center;
+}
+
+.initials-circle {
+    /* 模拟用户头像/大写字母 */
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    background-color: #007aff; /* 苹果蓝 */
+    color: white;
+    border-radius: 50%;
+    font-size: 2.5em;
+    font-weight: 600;
+    margin: 0 auto 15px auto;
+}
+
+.name {
+    font-size: 2.2em;
+    font-weight: 600; /* 模拟 SF Pro Semibold */
+    margin: 0;
+}
+
+.role-title {
+    font-size: 1em;
+    color: #8e8e93; /* 浅灰色辅助文字 */
+    margin-top: 5px;
+}
+
+/* 联系详情列表 */
+.contact-details {
+    padding: 0 0 20px 0;
+    background-color: #ffffff;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #1c1c1e;
+    border-top: 0.5px solid #ebebeb; /* iOS 列表分割线 */
+    transition: background-color 0.2s;
+}
+
+/* 鼠标/手指悬停效果 */
+.contact-item:active, .contact-item:hover {
+    background-color: #f7f7f7;
+}
+
+/* 图标容器 */
+.icon-box {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #007aff; /* 蓝色背景 */
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    margin-right: 15px;
+    font-size: 0.9em;
 }
 
-/* 卡片容器 */
-.card-container {
-    padding: 20px;
-}
-
-/* 名片本体样式 */
-.minimal-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0; /* 极细边框，增加质感 */
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* 轻微的阴影 */
-    width: 320px;
-    max-width: 90vw;
-    padding: 40px;
+/* 联系信息文本 */
+.info-text {
+    flex-grow: 1;
     text-align: left;
 }
 
-/* 姓名部分 */
-.name-section {
-    border-bottom: 2px solid #333; /* 强调姓名部分的分割线 */
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-}
-
-.name-section h1 {
-    font-size: 2.5em;
-    font-weight: 700;
-    color: #333;
+.label {
     margin: 0;
-    line-height: 1.2;
-}
-
-.role-hint {
     font-size: 0.8em;
-    color: #888;
-    margin: 0 0 5px 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    color: #8e8e93;
 }
 
-/* 联系方式部分 */
-.contact-section {
-    padding-top: 5px;
-}
-
-.contact-label {
-    font-size: 0.8em;
-    color: #888;
-    margin: 0 0 5px 0;
-    letter-spacing: 1px;
-}
-
-.contact-number {
-    font-size: 1.5em;
-    font-weight: 500;
-    color: #000;
+.value {
     margin: 0;
-    letter-spacing: 0.5px;
+    font-size: 1em;
+    font-weight: 400;
 }
 
-/* 极简排版修正 */
-p, h1 {
-    user-select: none; /* 防止选中文字影响视觉效果 */
+/* 主要联系方式（点击） */
+.primary-contact {
+    cursor: pointer;
+}
+
+/* 箭头图标 */
+.arrow {
+    color: #c7c7cc;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+/* 适配手机屏幕：卡片宽度自适应 */
+@media (max-width: 480px) {
+    .page-container {
+        padding-top: 20px;
+    }
+    .contact-card {
+        width: 100%; /* 在小屏幕上全宽 */
+        border-radius: 0; /* 消除圆角，模拟全屏应用界面 */
+        box-shadow: none;
+    }
+    .contact-item {
+        padding: 15px;
+    }
 }
