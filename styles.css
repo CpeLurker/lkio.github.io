@@ -7,7 +7,7 @@ body {
     color: #1c1c1e; /* 标准深色文字 */
     line-height: 1.4;
     -webkit-font-smoothing: antialiased;
-}
+} 
 
 /* 页面容器：实现垂直居中 */
 .page-container {
